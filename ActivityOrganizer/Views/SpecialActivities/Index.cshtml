@@ -1,0 +1,72 @@
+﻿@model ActivityOrganizer.Models.ActivityWithPriority
+
+@{
+    ViewData["Title"] = "Home";
+}
+<h3 class="text-center">Organize and keep track of your most important activities in a quick and easy way!</h3><br/><br/>
+
+
+<form asp-controller="SpecialActivities" asp-action="Index" method="get" class="form-inline my-2 my-lg-0 text-center">
+    <p>
+        <select asp-for="Priority" asp-items="Model.Priorities" class="form-control mr-sm-4 selectListAll">
+            <option value="">Priority | All</option>
+        </select>
+
+        <input type="text" name="searchActivityName" placeholder="Enter activity name or kind" class="form-control inputName" />
+        <input type="submit" value="Search activity" class="btn my-2 my-sm-0 searchButton" />
+    </p>
+</form>
+
+<h5>
+    <a asp-action="Create" class="text-yellow">Create New</a>
+</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities[0].ActivityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities[0].DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities[0].DateFinish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities[0].TypeOfActivity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activities[0].ActivityPriority)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var activity in Model.Activities)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => activity.ActivityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => activity.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => activity.DateFinish)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => activity.TypeOfActivity)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => activity.ActivityPriority)
+                </td>
+                <td>
+                    <a asp-action="Edit"    asp-route-id="@activity.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@activity.Id">Details</a> |
+                    <a asp-action="Delete"  asp-route-id="@activity.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
