@@ -23,7 +23,7 @@ namespace ActivityOrganizer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<ActivityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ActivityDb")));            
+            services.AddDbContext<ActivityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ActivityConnection")));            
         }
 
 
