@@ -1,18 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\drnda_000\\Desktop\\files\\PROJECTS\\Backend Projects\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj": {}
+    "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\drnda_000\\Desktop\\files\\PROJECTS\\Backend Projects\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj": {
+    "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\drnda_000\\Desktop\\files\\PROJECTS\\Backend Projects\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
+        "projectUniqueName": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
         "projectName": "ActivityOrganizer",
-        "projectPath": "C:\\Users\\drnda_000\\Desktop\\files\\PROJECTS\\Backend Projects\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
+        "projectPath": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
         "packagesPath": "C:\\Users\\drnda_000\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\drnda_000\\Desktop\\files\\PROJECTS\\Backend Projects\\ActivityOrganizer\\ActivityOrganizer\\obj\\",
+        "outputPath": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\drnda_000\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -75,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

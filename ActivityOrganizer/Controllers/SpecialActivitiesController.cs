@@ -14,28 +14,28 @@ namespace ActivityOrganizer.Controllers
     public class SpecialActivitiesController : Controller
     {
         private readonly ActivityContext _context;
-
         public SpecialActivitiesController(ActivityContext context)
         {
             _context = context;
         }
+
 
         // GET: SpecialActivities
         public async Task<IActionResult> Index(string priority, string searchActivityName)
         {
             var prioritiesQuery = from prior in _context.SpecialActivity
                                   orderby prior.ActivityPriority
-                             select prior.ActivityPriority;
+                                  select prior.ActivityPriority;
 
             var activitiesQuery = from activity in _context.SpecialActivity
                                   select activity;
 
             if (!string.IsNullOrEmpty(priority))
-            activitiesQuery = activitiesQuery.Where(item => item.ActivityPriority.Contains(priority));
+                activitiesQuery = activitiesQuery.Where(item => item.ActivityPriority.Contains(priority));
             
             if (!string.IsNullOrEmpty(searchActivityName)) 
-            activitiesQuery = activitiesQuery.Where(item => item.ActivityName.Contains(searchActivityName) || 
-                                                            item.TypeOfActivity.Contains(searchActivityName));
+                activitiesQuery = activitiesQuery.Where(item => item.ActivityName.Contains(searchActivityName) || 
+                                                                item.TypeOfActivity.Contains(searchActivityName));
 
             var activityWithPriority = new ActivityWithPriority
             {
@@ -49,17 +49,11 @@ namespace ActivityOrganizer.Controllers
         // GET: SpecialActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();            
 
             var specialActivity = await _context.SpecialActivity.FirstOrDefaultAsync(model => model.Id == id);
-            if (specialActivity == null)
-            {
-                return NotFound();
-            }
-
+            if (specialActivity == null) return NotFound();
+            
             return View(specialActivity);
         }
 
@@ -90,17 +84,11 @@ namespace ActivityOrganizer.Controllers
         // GET: SpecialActivities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();            
 
             var specialActivity = await _context.SpecialActivity.FindAsync(id);
-            if (specialActivity == null)
-            {
-                return NotFound();
-            }
-
+            if (specialActivity == null) return NotFound();
+            
             return View(specialActivity);
         }
 
@@ -127,12 +115,9 @@ namespace ActivityOrganizer.Controllers
                 {
                     if (!SpecialActivityExists(specialActivity.Id))
                     {
-                        return NotFound();
+                        return BadRequest();
                     }
-                    else
-                    {
-                        throw;
-                    }
+                    else throw;                    
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -143,17 +128,10 @@ namespace ActivityOrganizer.Controllers
         // GET: SpecialActivities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();            
 
-            var specialActivity = await _context.SpecialActivity
-                .FirstOrDefaultAsync(model => model.Id == id);
-            if (specialActivity == null)
-            {
-                return NotFound();
-            }
+            var specialActivity = await _context.SpecialActivity.FirstOrDefaultAsync(model => model.Id == id);
+            if (specialActivity == null) return NotFound();            
 
             return View(specialActivity);
         }
@@ -174,7 +152,6 @@ namespace ActivityOrganizer.Controllers
         {
             return _context.SpecialActivity.Any(model => model.Id == id);
         }
-
 
         public IActionResult Privacy()
         {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9AlxnbY85o6YWbvOgXIy4hQCvftVyqEi9LfFc7Q7iVXBpMX87U3t/LEWxPY3Yfzi9kVDa5wx7RzyORmos+PkVg==",
+  "dgSpecHash": "O+jh6JMzYYTTl18roTHVMHcitJPDnP+f8r74uyrKbV1UkbWbovkm2DA+7DnuZV+6OOMuq8qqFF5U8h4syuRKRA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\drnda_000\\Desktop\\files\\PROJECTS\\Backend Projects\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
+  "projectFilePath": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\drnda_000\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\drnda_000\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
