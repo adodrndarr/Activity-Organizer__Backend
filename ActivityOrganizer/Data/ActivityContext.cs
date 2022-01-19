@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ActivityOrganizer.Models;
 
-
 namespace ActivityOrganizer.Data
 {
     public class ActivityContext : DbContext

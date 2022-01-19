@@ -8584,23 +8584,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\drnda_000\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Adis.Drndar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
+      "projectUniqueName": "C:\\Users\\Adis.Drndar\\Desktop\\Practice Projects\\ActivityOrganizer\\Activity-Organizer__Backend\\ActivityOrganizer\\ActivityOrganizer.csproj",
       "projectName": "ActivityOrganizer",
-      "projectPath": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\ActivityOrganizer.csproj",
-      "packagesPath": "C:\\Users\\drnda_000\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\drnda_000\\Desktop\\ActivityOrganizer\\ActivityOrganizer\\obj\\",
+      "projectPath": "C:\\Users\\Adis.Drndar\\Desktop\\Practice Projects\\ActivityOrganizer\\Activity-Organizer__Backend\\ActivityOrganizer\\ActivityOrganizer.csproj",
+      "packagesPath": "C:\\Users\\Adis.Drndar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Adis.Drndar\\Desktop\\Practice Projects\\ActivityOrganizer\\Activity-Organizer__Backend\\ActivityOrganizer\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\drnda_000\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Adis.Drndar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8612,6 +8608,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -8623,6 +8620,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -8661,7 +8659,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

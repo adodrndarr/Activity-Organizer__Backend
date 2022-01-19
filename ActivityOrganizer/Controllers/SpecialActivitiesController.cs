@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,12 +6,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ActivityOrganizer.Data;
 using ActivityOrganizer.Models;
-
+using System;
 
 namespace ActivityOrganizer.Controllers
 {
     public class SpecialActivitiesController : Controller
     {
+        private const string SPECIAL_ACTIVITY_PARAMETERS = "Id, ActivityName, DateAdded, DateFinish, TypeOfActivity, ActivityPriority";
         private readonly ActivityContext _context;
         public SpecialActivitiesController(ActivityContext context)
         {
@@ -23,23 +23,25 @@ namespace ActivityOrganizer.Controllers
         // GET: SpecialActivities
         public async Task<IActionResult> Index(string priority, string searchActivityName)
         {
-            var prioritiesQuery = from prior in _context.SpecialActivity
-                                  orderby prior.ActivityPriority
-                                  select prior.ActivityPriority;
+            var activityPriorities = await (from sa in _context.SpecialActivity
+                                            orderby sa.ActivityPriority
+                                            select sa.ActivityPriority)
+                                     .Distinct()
+                                     .ToListAsync();
 
             var activitiesQuery = from activity in _context.SpecialActivity
                                   select activity;
 
             if (!string.IsNullOrEmpty(priority))
-                activitiesQuery = activitiesQuery.Where(item => item.ActivityPriority.Contains(priority));
+                activitiesQuery = activitiesQuery.Where(sa => sa.ActivityPriority.Contains(priority));
             
             if (!string.IsNullOrEmpty(searchActivityName)) 
-                activitiesQuery = activitiesQuery.Where(item => item.ActivityName.Contains(searchActivityName) || 
-                                                                item.TypeOfActivity.Contains(searchActivityName));
+                activitiesQuery = activitiesQuery.Where(sa => sa.ActivityName.Contains(searchActivityName) || 
+                                                              sa.TypeOfActivity.Contains(searchActivityName));
 
             var activityWithPriority = new ActivityWithPriority
             {
-                 Priorities = new SelectList (await prioritiesQuery.Distinct().ToListAsync()),
+                 Priorities = new SelectList (activityPriorities),
                  Activities = await activitiesQuery.ToListAsync() 
             };
 
@@ -49,10 +51,12 @@ namespace ActivityOrganizer.Controllers
         // GET: SpecialActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();            
+            if (id == null) 
+                return NotFound();
 
-            var specialActivity = await _context.SpecialActivity.FirstOrDefaultAsync(model => model.Id == id);
-            if (specialActivity == null) return NotFound();
+            var specialActivity = await _context.SpecialActivity.FirstOrDefaultAsync(sa => sa.Id == id);
+            if (specialActivity == null)
+                return NotFound();
             
             return View(specialActivity);
         }
@@ -68,26 +72,26 @@ namespace ActivityOrganizer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ActivityName,DateAdded,DateFinish,TypeOfActivity,ActivityPriority")] SpecialActivity specialActivity)
+        public async Task<IActionResult> Create([Bind(SPECIAL_ACTIVITY_PARAMETERS)] SpecialActivity specialActivity)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(specialActivity);
-                await _context.SaveChangesAsync();
-            
-                return RedirectToAction(nameof(Index));
-            }
+            if (!ModelState.IsValid)
+                return View(specialActivity);
 
-            return View(specialActivity);
+            _context.Add(specialActivity);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: SpecialActivities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null) return NotFound();            
+            if (id == null) 
+                return NotFound();            
 
             var specialActivity = await _context.SpecialActivity.FindAsync(id);
-            if (specialActivity == null) return NotFound();
+            if (specialActivity == null) 
+                return NotFound();
             
             return View(specialActivity);
         }
@@ -97,41 +101,40 @@ namespace ActivityOrganizer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ActivityName,DateAdded,DateFinish,TypeOfActivity,ActivityPriority")] SpecialActivity specialActivity)
+        public async Task<IActionResult> Edit(int id, [Bind(SPECIAL_ACTIVITY_PARAMETERS)] SpecialActivity specialActivity)
         {
             if (id != specialActivity.Id)
-            {
                 return NotFound();
-            }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(specialActivity);
+
+            try
             {
-                try
-                {
-                    _context.Update(specialActivity);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SpecialActivityExists(specialActivity.Id))
-                    {
-                        return BadRequest();
-                    }
-                    else throw;                    
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(specialActivity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                var activityExists = _context.SpecialActivity.Any(sa => sa.Id == id);
+                if (!activityExists)
+                    return BadRequest();
+
+                throw;
             }
 
-            return View(specialActivity);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: SpecialActivities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null) return NotFound();            
+            if (id == null) 
+                return NotFound();            
 
-            var specialActivity = await _context.SpecialActivity.FirstOrDefaultAsync(model => model.Id == id);
-            if (specialActivity == null) return NotFound();            
+            var specialActivity = await _context.SpecialActivity.FirstOrDefaultAsync(sa => sa.Id == id);
+            if (specialActivity == null)
+                return NotFound();
 
             return View(specialActivity);
         }
@@ -146,11 +149,6 @@ namespace ActivityOrganizer.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool SpecialActivityExists(int id)
-        {
-            return _context.SpecialActivity.Any(model => model.Id == id);
         }
 
         public IActionResult Privacy()

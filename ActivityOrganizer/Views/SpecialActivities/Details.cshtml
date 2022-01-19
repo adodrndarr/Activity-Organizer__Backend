@@ -1,48 +1,52 @@
-﻿@model ActivityOrganizer.Models.SpecialActivity
+﻿@model SpecialActivity
 
 @{
     ViewData["Title"] = "Details";
 }
 
-    <h1>@Html.DisplayFor(model => model.ActivityName)</h1>
+<h1>@Html.DisplayFor(sa => sa.ActivityName)</h1>
 
 <div>
     <h4>Details</h4>
     <hr />
+
     <dl class="row">
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.ActivityName)
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(sa => sa.ActivityName)
         </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.ActivityName)
+        <dd class="col-sm-9">
+            @Html.DisplayFor(sa => sa.ActivityName)
         </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.DateAdded)
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(sa => sa.DateAdded)
         </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.DateAdded)
+        <dd class="col-sm-9">
+            @Html.DisplayFor(sa => sa.DateAdded)
         </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.DateFinish)
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(sa => sa.DateFinish)
         </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.DateFinish)
+        <dd class="col-sm-9">
+            @Html.DisplayFor(sa => sa.DateFinish)
         </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.TypeOfActivity)
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(sa => sa.TypeOfActivity)
         </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.TypeOfActivity)
+        <dd class="col-sm-9">
+            @Html.DisplayFor(sa => sa.TypeOfActivity)
         </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.ActivityPriority)
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(sa => sa.ActivityPriority)
         </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.ActivityPriority)
+        <dd class="col-sm-9">
+            @Html.DisplayFor(sa => sa.ActivityPriority)
         </dd>
     </dl>
 </div>
-
 
 <div class="text-white">
     <a asp-action="Edit" asp-route-id="@Model.Id" class="text-yellow">Edit</a> |

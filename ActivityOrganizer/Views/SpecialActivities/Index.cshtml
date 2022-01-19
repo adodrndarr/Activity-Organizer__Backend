@@ -1,4 +1,4 @@
-﻿@model ActivityOrganizer.Models.ActivityWithPriority
+﻿@model ActivityWithPriority
 
 @{
     ViewData["Title"] = "Home";
@@ -24,47 +24,51 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Activities[0].ActivityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activities[0].DateAdded)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activities[0].DateFinish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activities[0].TypeOfActivity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activities[0].ActivityPriority)
-            </th>
-            <th></th>
+            @if(Model.Activities.Any()){
+                <th>
+                    @Html.DisplayNameFor(awp => awp.Activities[0].ActivityName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(awp => awp.Activities[0].DateAdded)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(awp => awp.Activities[0].DateFinish)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(awp => awp.Activities[0].TypeOfActivity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(awp => awp.Activities[0].ActivityPriority)
+                </th>
+                <th></th>
+            }
         </tr>
     </thead>
+
     <tbody>
-        @foreach (var activity in Model.Activities)
+        @foreach (var sa in Model.Activities)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(model => activity.ActivityName)
+                    @Html.DisplayFor(_ => sa.ActivityName)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => activity.DateAdded)
+                    @Html.DisplayFor(_ => sa.DateAdded)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => activity.DateFinish)
+                    @Html.DisplayFor(_ => sa.DateFinish)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => activity.TypeOfActivity)
+                    @Html.DisplayFor(_ => sa.TypeOfActivity)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => activity.ActivityPriority)
+                    @Html.DisplayFor(_ => sa.ActivityPriority)
                 </td>
+
                 <td>
-                    <a asp-action="Edit"    asp-route-id="@activity.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@activity.Id">Details</a> |
-                    <a asp-action="Delete"  asp-route-id="@activity.Id">Delete</a>
+                    <a asp-action="Edit"    asp-route-id="@sa.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@sa.Id">Details</a> |
+                    <a asp-action="Delete"  asp-route-id="@sa.Id">Delete</a>
                 </td>
             </tr>
         }

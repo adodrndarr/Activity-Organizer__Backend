@@ -3,7 +3,7 @@ using System.Linq;
 using ActivityOrganizer.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-
+using System.Collections.Generic;
 
 namespace ActivityOrganizer.Models
 {
@@ -11,14 +11,27 @@ namespace ActivityOrganizer.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new ActivityContext(serviceProvider.GetRequiredService<DbContextOptions<ActivityContext>>()))
-            {
-                // If there are any activities in the DB, the seed initializer returns and no activities are added.
-                if (context.SpecialActivity.Any()) return;
+            var dbContextOptions = serviceProvider.GetRequiredService<DbContextOptions<ActivityContext>>();
+            using var context = new ActivityContext(dbContextOptions);
 
-                context.SpecialActivity.AddRange(
-                    new SpecialActivity
-                    {   
+            context.Database.EnsureCreated();
+
+            // If there are any activities in the DB, the seed initializer returns and no activities are added.
+            if (context.SpecialActivity.Any())
+                return;
+
+            var activities = GetSpecialActivities();
+
+            context.SpecialActivity.AddRange(activities);
+            context.SaveChanges();
+        }
+
+        private static List<SpecialActivity> GetSpecialActivities()
+        {
+            return new List<SpecialActivity>
+            {
+                 new SpecialActivity
+                    {
                         ActivityName = "Web Development",
                         DateAdded = DateTime.Parse("2019-10-15"),
                         DateFinish = DateTime.Parse("2020-10-15"),
@@ -48,10 +61,8 @@ namespace ActivityOrganizer.Models
                         DateFinish = DateTime.Parse("2100-01-01"),
                         TypeOfActivity = "Travel",
                         ActivityPriority = "Low"
-                    });
-
-                context.SaveChanges();
-            }
+                    }
+            };
         }
     }
 }

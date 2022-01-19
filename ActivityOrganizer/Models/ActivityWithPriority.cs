@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-
 namespace ActivityOrganizer.Models
 {
     public class ActivityWithPriority
